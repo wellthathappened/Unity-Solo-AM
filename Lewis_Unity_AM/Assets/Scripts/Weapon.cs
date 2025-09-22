@@ -36,7 +36,6 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-
         weaponSpeaker = GetComponent<AudioSource>();
         firePoint = transform.GetChild(0);
     }

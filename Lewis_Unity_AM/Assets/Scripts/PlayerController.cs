@@ -98,8 +98,10 @@ public class PlayerController : MonoBehaviour
     }
     public void Attack()
     {
-        if(currentWeapon)
+        if (currentWeapon)
+        {
             currentWeapon.fire();
+        }
     }
     public void Reload()
     {
