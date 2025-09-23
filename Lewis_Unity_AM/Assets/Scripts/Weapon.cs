@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
 
     [Header("Meta Attributes")]
     public bool canFire = true;
+    public bool holdToAttack = true;
     public int weaponID;
     public string weaponName;
 

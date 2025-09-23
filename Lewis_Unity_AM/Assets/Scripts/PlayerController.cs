@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public int health = 5;
     public int maxHealth = 5;
+
+    public bool attacking = false;
 
 
     public void Start()
@@ -75,6 +78,10 @@ public class PlayerController : MonoBehaviour
         else
             pickupObj = null;
 
+        if (currentWeapon)
+            if (currentWeapon.holdToAttack && attacking)
+                currentWeapon.fire();
+
         rb.linearVelocity = (temp.x * transform.forward) +
                             (temp.y * transform.up) +
                             (temp.z * transform.right);
@@ -93,11 +100,21 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(jumpRay, groundDetectLength))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
     }
-    public void Attack()
+    public void Attack(InputAction.CallbackContext context)
     {
         if (currentWeapon)
         {
-            currentWeapon.fire();
+            if (currentWeapon.holdToAttack)
+            {
+                if (context.ReadValueAsButton())
+                    attacking = true;
+                else
+                    attacking = false;
+            }
+
+            else
+                if (context.ReadValueAsButton())
+                    currentWeapon.fire();
         }
     }
     public void Reload()
