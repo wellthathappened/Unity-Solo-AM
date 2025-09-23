@@ -70,10 +70,7 @@ public class PlayerController : MonoBehaviour
             if (interactHit.collider.gameObject.tag == "weapon")
             {
                 pickupObj = interactHit.collider.gameObject;
-                Debug.Log("FOUND");
             }
-
-            Debug.Log(interactHit.collider.gameObject.tag);
         }
         else
             pickupObj = null;
@@ -117,6 +114,13 @@ public class PlayerController : MonoBehaviour
         }
         else
             Reload();
+    }
+    public void DropWeapon()
+    {
+        if (currentWeapon)
+        {
+            currentWeapon.GetComponent<Weapon>().unequip();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

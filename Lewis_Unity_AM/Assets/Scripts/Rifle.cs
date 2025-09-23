@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class Rifle : Weapon
 {
     public void toggleFireMode()

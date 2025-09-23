@@ -7,7 +7,6 @@ public class Weapon : MonoBehaviour
 {
     PlayerController player;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject projectile;
     public AudioSource weaponSpeaker;
     public Transform firePoint;
