@@ -26,10 +26,15 @@ public class BasicEnemyController : MonoBehaviour
     void Update()
     {
         if (health <= 0)
+        {
             Destroy(gameObject);
+        }
 
-        if (isFollowing)
-            agent.destination = player.transform.position;
+        else
+        {
+            if (isFollowing)
+                agent.destination = player.transform.position;
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
