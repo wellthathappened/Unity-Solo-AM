@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         jumpRay.origin = transform.position;
         jumpRay.direction = -transform.up;
 
-        interactRay.origin = transform.position;
+        interactRay.origin = playerCam.transform.position;
         interactRay.direction = playerCam.transform.forward;
 
         if (Physics.Raycast(interactRay, out interactHit, interactDistance))
@@ -100,6 +100,13 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(jumpRay, groundDetectLength))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
     }
+    public void fireModeSwitch()
+    {
+        if (currentWeapon.weaponID == 1)
+        {
+            currentWeapon.GetComponent<Rifle>().changeFireMode();
+        }
+    }
     public void Attack(InputAction.CallbackContext context)
     {
         if (currentWeapon)
@@ -120,7 +127,8 @@ public class PlayerController : MonoBehaviour
     public void Reload()
     {
         if (currentWeapon)
-            currentWeapon.reload();
+            if (!currentWeapon.reloading)
+                currentWeapon.reload();
     }
     public void Interact()
     {
@@ -128,6 +136,8 @@ public class PlayerController : MonoBehaviour
         {
             if (pickupObj.tag == "weapon")
                 pickupObj.GetComponent<Weapon>().equip(this);
+
+            pickupObj = null;
         }
         else
             Reload();
