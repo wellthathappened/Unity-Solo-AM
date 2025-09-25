@@ -10,6 +10,8 @@ TagManager:
   - basicenemy
   - weapon
   - proj
+  - ui_health
+  - pause
   layers:
   - Default
   - TransparentFX
